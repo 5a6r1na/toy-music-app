@@ -1,0 +1,23 @@
+# Java / Maven / Gradle
+target/
+*.class
+*.jar
+
+# Node / Vue
+node_modules/
+dist/
+build/
+
+# Python / Flask
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Database
+*.db
+*.sqlite3
+
+# OS files
+.DS_Store
