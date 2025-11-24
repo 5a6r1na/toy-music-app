@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toy-music-backend
+  namespace: toy-music
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: toy-music-backend
+  template:
+    metadata:
+      labels:
+        app: toy-music-backend
+    spec:
+      containers:
+        - name: backend
+          image: toy-music-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8081
+          env:
+            - name: MIDI_STORAGE_PATH
+              value: /data/midi
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://musicdb:5432/musicapp
+          volumeMounts:
+            - name: midi-storage
+              mountPath: /data/midi
+      volumes:
+        - name: midi-storage
+          persistentVolumeClaim:
+            claimName: midi-pvc
